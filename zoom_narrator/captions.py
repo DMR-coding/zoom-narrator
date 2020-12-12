@@ -1,7 +1,8 @@
-import os
-import pysubs2
-from typing import Optional, AsyncGenerator
 import asyncio
+import os
+from typing import Optional, AsyncGenerator
+
+import pysubs2
 
 CAPTIONS_EXTENSION = ".ass"
 

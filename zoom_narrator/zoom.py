@@ -1,8 +1,9 @@
-from contextlib import asynccontextmanager
-from aiohttp import ClientSession
 import asyncio
-import os
 import json
+import os
+from contextlib import asynccontextmanager
+
+from aiohttp import ClientSession
 
 RESUME_FILE = ".resumesession"
 

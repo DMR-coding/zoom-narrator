@@ -1,5 +1,5 @@
-from contextlib import AbstractContextManager
 import subprocess
+from contextlib import AbstractContextManager
 
 
 def play(path) -> AbstractContextManager:
