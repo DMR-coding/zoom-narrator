@@ -1,7 +1,8 @@
 import asyncio
 import os
 from typing import Optional, AsyncGenerator
-
+from datetime import datetime, timedelta
+from functools import partial
 import pysubs2
 
 CAPTIONS_EXTENSIONS = ["ssa", "ass", "tmp", "vtt", "srt"]
@@ -25,17 +26,27 @@ def load(path: str) -> pysubs2.SSAFile:
     return pysubs2.load(path)
 
 
-def dump(captions: pysubs2.SSAFile) -> None:
-    for event in captions.events:
-        print(f"{event.start/1000:05}: {event.text}")
+def dump(captions: pysubs2.SSAFile) -> str:
+    return "\n".join(
+        [f"{event.start/1000:05}: {event.text}" for event in captions.events]
+    )
 
 
 async def timed_captions(captions: pysubs2.SSAFile) -> AsyncGenerator[(int, str)]:
-    for index, event in enumerate(captions):
-        prev_start = captions[index - 1].start if index > 0 else 0
-        event_delta = event.start - prev_start
-        await asyncio.sleep(event_delta / 1000)
+    wait_until_event_time = partial(_wait_until_reltime, datetime.now())
+
+    for event in captions:
+        await wait_until_event_time(event.start)
         yield event
+
+
+async def _wait_until_reltime(base_time: datetime, reltime_ms: int) -> None:
+    abs_time = base_time + timedelta(milliseconds=reltime_ms)
+    time_until = abs_time - datetime.now()
+
+    # If the system ever gets delayed and time_until winds up being less than zero, events will just start triggering
+    # as soon as they're queued until things get caught up.
+    await asyncio.sleep(time_until.total_seconds())
 
 
 def _root_name(path):
