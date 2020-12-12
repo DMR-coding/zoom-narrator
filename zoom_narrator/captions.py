@@ -1,14 +1,15 @@
 import asyncio
 import os
-from typing import Optional, AsyncGenerator
 from datetime import datetime, timedelta
 from functools import partial
+from typing import Optional, AsyncGenerator
+
 import pysubs2
 
 CAPTIONS_EXTENSIONS = ["ssa", "ass", "tmp", "vtt", "srt"]
 
 
-def probe(audio_path: str) -> Optional[str]:
+def _probe(audio_path: str) -> Optional[str]:
     audio_name = _root_name(audio_path)
     audio_dir = os.path.dirname(audio_path)
 
@@ -22,8 +23,13 @@ def probe(audio_path: str) -> Optional[str]:
     return None
 
 
-def load(path: str) -> pysubs2.SSAFile:
-    return pysubs2.load(path)
+def load(caption_path: Optional[str], audio_path: str) -> pysubs2.SSAFile:
+    if not caption_path:
+        caption_path = _probe(audio_path)
+    if not caption_path:
+        raise ValueError("Couldn't find caption file, please specify manually.")
+
+    return pysubs2.load(caption_path)
 
 
 def dump(captions: pysubs2.SSAFile) -> str:

@@ -28,14 +28,10 @@ from . import audio, captions, zoom
     help="Zoom captioning API key (URL). Will prompt if not specified.",
 )
 async def main(audio_path: str, key: str, caption_path: Optional[str]):
-    if not caption_path:
-        caption_path = captions.probe(audio_path)
-    if not caption_path:
-        raise click.ClickException(
-            "Couldn't find caption file, please specify manually."
-        )
-
-    caption_file = captions.load(caption_path)
+    try:
+        caption_file = captions.load(caption_path, audio_path)
+    except ValueError as e:
+        raise click.ClickException(e)
 
     with audio.play(audio_path):
         async with zoom.open_zoom_session(key) as session:
