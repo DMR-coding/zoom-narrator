@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "zoom-narrator"
+version = "0.1.0"
+description = "Play audio while streaming its closed captions to Zoom"
+authors = ["Daniel Maxwell-Ross <daniel@maxwell-ross.us>"]
+license = "GNU GPL v3"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
