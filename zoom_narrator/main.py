@@ -14,6 +14,7 @@ from . import audio, captions, zoom
 @click.option(
     "-c",
     "--captions",
+    "caption_path",
     required=False,
     default=None,
     help="Manually specify captions file.",
@@ -30,7 +31,9 @@ async def main(audio_path: str, key: str, caption_path: Optional[str]):
     if not caption_path:
         caption_path = captions.probe(audio_path)
     if not caption_path:
-        raise ValueError("Couldn't find caption file, please specify manually.")
+        raise click.ClickException(
+            "Couldn't find caption file, please specify manually."
+        )
 
     caption_file = captions.load(caption_path)
 
