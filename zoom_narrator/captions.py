@@ -4,7 +4,7 @@ from typing import Optional, AsyncGenerator
 
 import pysubs2
 
-CAPTIONS_EXTENSION = ".ass"
+CAPTIONS_EXTENSIONS = ["ssa", "ass", "tmp", "vtt", "srt"]
 
 
 def probe(audio_path: str) -> Optional[str]:
@@ -12,7 +12,10 @@ def probe(audio_path: str) -> Optional[str]:
     audio_dir = os.path.dirname(audio_path)
 
     for file in os.listdir(audio_dir):
-        if _root_name(file) == audio_name and file.endswith(CAPTIONS_EXTENSION):
+        if (
+            _root_name(file) == audio_name
+            and _last_extension(file) in CAPTIONS_EXTENSIONS
+        ):
             return os.path.join(audio_dir, file)
 
     return None
@@ -36,4 +39,8 @@ async def timed_captions(captions: pysubs2.SSAFile) -> AsyncGenerator[(int, str)
 
 
 def _root_name(path):
-    return os.path.basename(path).split(".", 1)[0]
+    return os.path.basename(path).split(".")[0]
+
+
+def _last_extension(path):
+    return os.path.basename(path).split(".")[-1]
