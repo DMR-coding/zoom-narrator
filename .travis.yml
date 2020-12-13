@@ -13,3 +13,9 @@ install:
 script:
   - ./static-analysis.sh
   - ./test.sh
+deploy:
+  provider: script
+  on:
+    repo: DMR-coding/zoom-narrator
+    tags: true
+  script: poetry publish --build --username __token__ --password $PYPI_PASS
