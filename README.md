@@ -1,9 +1,14 @@
 # zoom-narrator [![Build Status](https://travis-ci.com/DMR-coding/zoom-narrator.svg?branch=main)](https://travis-ci.com/DMR-coding/zoom-narrator)
-Play audio while streaming its closed captions to Zoom
+Play audio while streaming its closed captions to Zoom.
 
 ## Prerequisites
-This application relies on `ffmpeg` (specifically, `ffplay`) to play audio at the command line. The user is responsible
+The user is responsible for providing a working Python environment for this application. If you need help with this step, see [the PythonWiki beginner's guide](https://wiki.python.org/moin/BeginnersGuide/Download).
+
+Additionally, this application relies on `ffmpeg` (specifically, `ffplay`) to play audio at the command line. The user is responsible
 for ensuring this utility is installed and on the `PATH`.
+
+## Installing
+At the command line, type `pip install zoom-narrator`.
 
 ## Using 
 * [Enable closed captioning for your Zoom account](https://support.zoom.us/hc/en-us/articles/207279736-Managing-and-viewing-closed-captioning#h_4cb4e874-d574-4e40-ab12-7d8fae1f71cc).
@@ -19,7 +24,4 @@ Environment and prerequisites are managed by `poetry`. See https://python-poetry
 * To create an environment and install prerequisites, run `poetry install` in the top level of the repository.
 * Invoke the application with `poetry run zoom-narrator`.
 * Build packages with `poetry build`.
-
-## Installing
-After building (there are no releases yet), install with `pip install dist/\<name of release\>.whl`.
 
