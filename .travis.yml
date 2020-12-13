@@ -18,4 +18,4 @@ deploy:
   on:
     repo: DMR-coding/zoom-narrator
     tags: true
-  script: poetry publish --build --username __token__ --password $PYPI_PASS
+  script: poetry publish --build --username __token__ --password $PYPI_KEY
