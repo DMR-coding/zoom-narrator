@@ -35,13 +35,11 @@ class ZoomSession:
         self._seq += 1
         return current
 
-    def send_caption(self, caption: str):
-        asyncio.create_task(
-            self.http_session.post(
-                self.api_key,
-                params={"seq": self.seq, "lang": "en-US"},
-                data=caption,
-            )
+    async def send_caption(self, caption: str):
+        await self.http_session.post(
+            self.api_key,
+            params={"seq": self.seq, "lang": "en-US"},
+            data=caption,
         )
 
         print(caption)

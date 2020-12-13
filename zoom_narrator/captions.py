@@ -32,7 +32,7 @@ def load(caption_path: Optional[str], audio_path: str) -> pysubs2.SSAFile:
     return pysubs2.load(caption_path)
 
 
-def dump(captions: pysubs2.SSAFile) -> str:
+def dump_captions(captions: pysubs2.SSAFile) -> str:
     return "\n".join(
         [f"{event.start/1000:05}: {event.text}" for event in captions.events]
     )

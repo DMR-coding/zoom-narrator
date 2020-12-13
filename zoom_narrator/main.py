@@ -36,7 +36,7 @@ async def main(audio_path: str, key: str, caption_path: Optional[str]):
     with audio.play(audio_path):
         async with zoom.open_zoom_session(key) as session:
             async for event in captions.timed_captions(caption_file):
-                session.send_caption(event.plaintext)
+                await session.send_caption(event.plaintext)
 
 
 if __name__ == "__main__":
