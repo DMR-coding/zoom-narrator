@@ -1,4 +1,4 @@
-# zoom-narrator
+# zoom-narrator [![Build Status](https://travis-ci.com/DMR-coding/zoom-narrator.svg?branch=main)](https://travis-ci.com/DMR-coding/zoom-narrator)
 Play audio while streaming its closed captions to Zoom
 
 ## Prerequisites
