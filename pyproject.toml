@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "zoom-narrator"
-version = "0.1.0"
+version = "1.0.0"
 description = "Play audio while streaming its closed captions to Zoom"
 authors = ["Daniel Maxwell-Ross <daniel@maxwell-ross.us>"]
 license = "GNU GPL v3"
