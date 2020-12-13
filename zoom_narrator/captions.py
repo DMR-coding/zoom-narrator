@@ -38,7 +38,9 @@ def dump_captions(captions: pysubs2.SSAFile) -> str:
     )
 
 
-async def timed_captions(captions: pysubs2.SSAFile) -> AsyncGenerator[(int, str)]:
+async def timed_captions(
+    captions: pysubs2.SSAFile,
+) -> AsyncGenerator[pysubs2.SSAEvent, None]:
     wait_until_event_time = partial(_wait_until_reltime, datetime.now())
 
     for event in captions:

@@ -1,6 +1,6 @@
 from unittest import IsolatedAsyncioTestCase, mock
 from .. import captions
-from datetime import datetime, timedelta
+from datetime import timedelta
 import freezegun
 
 
